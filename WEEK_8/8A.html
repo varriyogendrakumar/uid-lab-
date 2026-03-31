@@ -1,0 +1,43 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>Rotating Square</title> 
+  <style> 
+    body { 
+      margin: 0; 
+      height: 100vh; 
+      display: flex; 
+   
+ 
+   
+ 
+      flex-direction: column; 
+      justify-content: flex-start; 
+      align-items: center; 
+      background-color: #4d2c68; 
+      font-family: Arial, sans-serif; 
+      padding-top: 50px; 
+    } 
+    .square { 
+      width: 150px; 
+      height: 150px; 
+      background: #5a2828cc; 
+      border-radius: 15px; 
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); 
+      animation: rotate 3s linear infinite; 
+    } 
+    @keyframes rotate { 
+      from { 
+        transform: rotate(0deg); 
+      } 
+      to { 
+        transform: rotate(360deg); 
+      } 
+    } 
+  </style> 
+</head> 
+<body> 
+    <h1 style="color: #c9b2b2;">Rotating Square</h1> 
+    <div class="square"></div> 
+</body> 
+</html> 
