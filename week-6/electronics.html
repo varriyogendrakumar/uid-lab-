@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<style>
+
+body {
+
+margin: 0;
+
+background-color: aliceblue;
+
+font-family: sans-serif;
+
+}
+
+
+
+.products {
+
+grid-area: products;
+
+display: grid;
+
+grid-template-columns: repeat(2, 1fr);
+
+gap: 10px;
+
+padding: 20px;
+
+}
+
+
+.product-card {
+
+background: white;
+
+border: 1px solid #ddd;
+
+padding: 20px;
+
+text-align: center;
+
+border-radius: 8px;
+
+height: auto;
+
+width: 600px;
+
+}
+
+.p{
+
+text-align: center;
+
+background-color: tomato;
+
+align-items: center;
+
+}
+
+img{
+
+width: 120px;
+
+height: auto;
+
+border-radius: 8px;
+
+}
+
+
+
+.button {
+
+background-color: blue;
+
+color: white;
+
+border: none;
+
+padding: 10px 20px;
+
+cursor: pointer;
+
+border-radius: 50px;
+
+margin-top: 10px;
+
+}
+
+
+.button:hover {
+
+background-color: #7094ff;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="products">
+
+<div class="product-card">
+
+<img src="data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADrbWV0YQAAAAAAAAAhaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAAAAAAAOcGl0bQAAAAAAAQAAAB5pbG9jAAAAAEQAAAEAAQAAAAEAAAETAAAE8QAAAChpaW5mAAAAAAABAAAAGmluZmUCAAAAAAEAAGF2MDFDb2xvcgAAAABqaXBycAAAAEtpcGNvAAAAFGlzcGUAAAAAAAAAbAAAAI4AAAAQcGl4aQAAAAADCAgIAAAADGF2MUOBAAwAAAAAE2NvbHJuY2x4AAIAAgAGgAAAABdpcG1hAAAAAAAAAAEAAQQBAoMEAAAE+W1kYXQSAAoJGBn1xrBAgIGhMuEJEgACiiihQNgPzm6QK3/jCA3x1z/MAnEn68TcK15LONhd9Wbf5f/lIkS7SFfZIvSyNRSN/O5jg8k875WAadoOddlc9OFGf7V3cN9P3SwMxYxkJm1mP3M2t7+4ErXrb4/5UMQnnGL5QjCfaVfn+hviBot7xsN36e6IgxJS64Zqxt+JsiHqAwskrhwAsS2OyGDznd1L7u72vo2Gdp5d9A95Wn8vXA0BRNYoP/q6k+jdXLR4wt3VA+gYGhlE5cpeqtWlRq1Slfcf3QVchUTHn3UReUDVvF6zUvqk3vAbOY+u+7h3qd3FnWnFeDq/34+RO6nKBajHksnYpLhYYEfoj7XNKQrF1uD3JwOlWS8ncNJa/HUOOABJfqUGLdYGJIsu2Mxt/jLdbl+S/C8w1BJHog8Ace4nhoR15O0HGErgphOzJTgMInxhh9TMMtm+qTgj+9Kqfz2tjhQraFE5MwvClElI7n9jmxENGBaX55MAnVbAQzuw2U6ryD/LeRXsDVbNoA90QnIq3tyPg7jCTH8j9EmRNntB30c/xwQ8yhviVbTe/iQ24MUTCI7UeTm5QSyvQS+zVoApNP5joKM1srboKOlb/QymNzl9QK2/rVWby4kg4J/YqAMA8zcFDf9MbdtCP/6qBosj9G2sHon3bjIzUWAXoeKe3HMUzl3kQh5bD1kS5HsjstDEyIwPISZLTpvyqwIYC2NHAGfRnxbcNLUFETK12oBTMEGRiybUF9BKCq3NK3VzKkro+v8gIoV+XEWs2e2MfA1/kRop9ypEW0J70ISIUIaH+1JJansHFTzUzeiPU6Yoki6c+PYGC9kkyzkoo027gWHRRItzZEL4dcAqtxhKCTtSxCHGz0BK0iNioX7yKA5VfqSVC/+adq45fpza0Ko5MO00uEbmA7mkjPnFqUdfcPLXoVJEy462PLUbrYRGfgw6o7ytv2MBd3NtjXCZ6wzn1HgwuuN3GDTGpzJEJhtIGRKTquoHZa2guYdI/BOE0ZMB73bs5nHf0057Re4fpVGuOZ+Av5Bq4EAstOy5GTvxMoy82mlGgrgoJVUgdpmJunRaVvGTFogXuTUbSLJvRmTK7jCy8Lj9VZqt7KKcJreSUdwbsHzfatpJDqvJYgH6E4/L/FTmXCVN+4MtYCppEE/OeNv8vLj7T+HrJcMyg8hxq1oIuIuLGyJhipYjQkPPcRFdXdE8BWhj4qGGLmj2+nrbgJEPktPBXL20G797FM05YR9tRunKukGTpT34fWaOHhkBuHNBLEkncYLLZM1FIKErPHyguZN5FhgOIASK+x3e7ja77narPfJs1nXqjyPArYi+O4z7oTLA3KMUXWJ1mXWk01YGH6j14EsWeFVDTSMl26AQJ1VBDarEcWIACJViO9RzQc3ddOOspnySg5vpOPPMqVPZGz5aCrF6MMvu7HBLqjedoLbGc36nUSwydqwStvsJkSOsLUrKZBb+eD0hSofSg2yZWv9Li79ZnWXsEb/z3Bte546dGV9dkrfPSKxWSgLhY0IuHjxDuGJg028SDnp5CaUPce3LQgBhTuSHvjfP+7q/fO+Sb7uOhHYyMgw9twE1DEKAwrKO2Ae4n1BtZFoHlmgimELBAUoxqETD+tlsAbdt62qDQadVGqCEl5YEVJcHX5EqWhHRKOIg2vRci8a2xA==">
+
+<h3>Iphone 13</h3>
+
+<p>$599</p>
+
+<p>12GB RAM | 256GB Storage</p>
+
+<button class="button">Add to Cart</button>
+
+</div>
+
+<div class="product-card">
+
+<img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTw6wDj1sbYrGardzjZHrUnuKSVKcNzSlLWwqhgO2VrPkO-hbIjykZ5Yx8tS31JjlsjIDzEV_HegVkGk3Qbqml3BTuDpo0NixzB5A_xIlJlkIa0aC48JpPNTzi1zC0yZDp5&usqp=CAc">
+
+<h3>one plus 15</h3>
+
+<p>$799</p>
+
+<p>12GB RAM | 512GB Storage</p>
+
+<button class="button">Add to Cart</button>
+
+</div>
+
+<div class="product-card">
+
+<img src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-air-size-unselect-202601-gallery-1?wid=5120&hei=3280&fmt=webp&qlt=90&.v=YTFkSnBPS2tMZFdhaFNRRkx6VnJZaUd4WmthcldkemtncUgvMzhXenFEVkJtY3lja2FvNzhqZzhFY0x4NDFzYkE0ZWxMVGt3djRUV0FHWk92REs5YjAxSlgrVWMrMzU1OXo2c2JyNjJZTGpEUE90ekhYc3dvRnFSbFQ0NEVuaVQ&traceId=1">
+
+<h3>MAC M5</h3>
+
+<p>$1399</p>
+
+<p>16GB RAM | 1TB Storage</p>
+
+<button class="button">Add to Cart</button>
+
+</div>
+
+<div class="product-card">
+
+<img src="c:\Users\acer\AppData\Local\Packages\Microsoft.ScreenSketch_8wekyb3d8bbwe\TempState\Screenshot 2026-03-31 195304.png">
+
+<h3>HP victus</h3>
+
+<p>$749</p>
+
+<p>16GB RAM | 512GB Storage</p>
+
+<button class="button">Add to Cart</button>
+
+</div>
+
+
+
+</body>
+
+</html>
