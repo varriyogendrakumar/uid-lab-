@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETHER MOTORS | Pure Machine. Pure Soul.</title>
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & VARIABLES
+           ========================================================================== */
+        :root {
+            --bg-dark: #070708;
+            --bg-card: #121214;
+            --accent: #D4AF37;
+            --accent-muted: #aa8c2c;
+            --text-light: #F5F5F7;
+            --text-muted: #8E8E93;
+            --glass-bg: rgba(18, 18, 20, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.04);
+            --title-font: 'Cinzel', 'Didot', 'Playfair Display', serif;
+            --body-font: 'Inter', '-apple-system', BlinkMacSystemFont, sans-serif;
+            --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: all 0.2s ease;
+        }
+
+        /* ==========================================================================
+           2. BASE RESETS & GLOBAL STYLES
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--body-font);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* Utility Layout Elements */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        .section {
+            padding: 10rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 5rem;
+            max-width: 700px;
+        }
+
+        .section-tag {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-family: var(--title-font);
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+        }
+
+        /* Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition-smooth);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Premium Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: var(--text-light);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--text-light);
+            border-color: var(--text-light);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-light);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ==========================================================================
+           3. STICKY NAVIGATION
+           ========================================================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: transparent;
+            border-bottom: 1px solid transparent;
+            transition: var(--transition-smooth);
+            padding: 2rem 0;
+        }
+
+        .navbar.scrolled {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1.2rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: var(--title-font);
+            font-size: 1.6rem;
+            letter-spacing: 0.4em;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3.5rem;
+        }
+
+        .nav-link {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition-fast);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-light);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            border: 1px solid var(--accent);
+            padding: 0.7rem 1.8rem;
+            color: var(--accent);
+            font-weight: 600;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-cta:hover {
+            background-color: var(--accent);
+            color: var(--bg-dark);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background-color: var(--text-light);
+            transition: var(--transition-fast);
+        }
+
+        /* ==========================================================================
+           4. HERO SECTION
+           ========================================================================== */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at 70% 50%, #1a1a1f 0%, var(--bg-dark) 70%);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.4;
+            /* Verified Working Image */
+            background: url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30vh;
+            background: linear-gradient(to top, var(--bg-dark), transparent);
+            z-index: 2;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-family: var(--title-font);
+            font-size: 5.5rem;
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+        }
+
+        .hero-title span {
+            display: block;
+            color: var(--accent);
+            font-size: 4.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 550px;
+            margin-bottom: 3.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.9s;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==========================================================================
+           5. ABOUT SECTION
+           ========================================================================== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+            align-items: center;
+        }
+
+        .about-img-box {
+            position: relative;
+            padding-bottom: 120%; 
+            background: #111;
+            overflow: hidden;
+        }
+
+        .about-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Verified Working Image */
+            background: url('https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+            transition: var(--transition-smooth);
+        }
+
+        .about-img-box:hover .about-img {
+            transform: scale(1.05);
+        }
+
+        .about-accent {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 200px;
+            height: 200px;
+            border: 1px solid var(--accent);
+            z-index: -1;
+        }
+
+        .about-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ==========================================================================
+           6. PRODUCTS CAROUSEL
+           ========================================================================== */
+        .products {
+            background-color: #0b0b0d;
+            position: relative;
+        }
+
+        .product-list {
+            display: flex;
+            gap: 3rem;
+            overflow-x: auto;
+            padding: 2rem 4rem 4rem 4rem;
+            margin: 0 -4rem;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+
+        .product-list::-webkit-scrollbar {
+            display: none; 
+        }
+
+        .card {
+            flex: 0 0 450px;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .card-img-box {
+            height: 280px;
+            background: #18181c;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            transition: var(--transition-smooth);
+        }
+
+        /* --- UPDATED WORKING IMAGE URLS FOR CARDS --- */
+        /* Replace these with your own files later (e.g., url('green-ninja.jpg') ) */
+        .card-img-1 { background: url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80') center/cover no-repeat; }
+        .card-img-2 { background: url('https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=800&q=80') center/cover no-repeat; }
+        .card-img-3 { background: url('https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?auto=format&fit=crop&w=800&q=80') center/cover no-repeat; }
+
+        .card:hover .card-img {
+            transform: scale(1.08);
+        }
+
+        .card-body {
+            padding: 2.5rem;
+        }
+
+        .card-title {
+            font-family: var(--title-font);
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            height: 50px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .spec-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: block;
+        }
+
+        .spec-val {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-top: 0.2rem;
+        }
+
+        /* Expandable Details Section */
+        .expand-btn {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .expand-btn span::after {
+            content: ' +';
+            font-weight: bold;
+        }
+
+        .card.expanded .expand-btn span::after {
+            content: ' -';
+        }
+
+        .extra-info {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .card.expanded .extra-info {
+            max-height: 200px;
+            padding-top: 1.5rem;
+        }
+
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .info-list li {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed rgba(255,255,255,0.05);
+            padding-bottom: 0.4rem;
+        }
+
+        .info-list li span:last-child {
+            color: var(--text-light);
+        }
+
+        /* Scroll Controller Utilities */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            justify-content: flex-end;
+        }
+
+        .scroll-btn {
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: transparent;
+            color: var(--text-light);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+
+        .scroll-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ==========================================================================
+           7. STATISTICS SECTION
+           ========================================================================== */
+        .stats {
+            background: linear-gradient(rgba(7,7,8,0.9), rgba(7,7,8,0.9)), 
+                        url('https://images.unsplash.com/photo-1508847154043-be12a62861c1?auto=format&fit=crop&w=1400&q=80') center/cover fixed no-repeat;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--title-font);
+            font-size: 4rem;
+            color: var(--accent);
+            font-weight: 400;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           8. FEATURES SECTION
+           ========================================================================== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 4rem 3rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            transition: var(--transition-smooth);
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-family: var(--title-font);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .feature-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* ==========================================================================
+           9. GALLERY SECTION
+           ========================================================================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 300px;
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .gallery-item.tall {
+            grid-row: span 2;
+        }
+
+        .gallery-item.wide {
+            grid-column: span 2;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+            filter: grayscale(40%) brightness(80%);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(7, 7, 8, 0.9) 10%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+            filter: grayscale(0%) brightness(100%);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-title {
+            font-family: var(--title-font);
+            font-size: 1.3rem;
+            color: var(--text-light);
+        }
+
+        .gallery-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+        }
+
+        /* ==========================================================================
+           10. TESTIMONIALS SECTION
+           ========================================================================== */
+        .testimonials {
+            background-color: #0b0b0d;
+        }
+
+        .slider {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            text-align: center;
+        }
+
+        .slide-item {
+            display: none;
+            animation: sliderFade 0.5s ease forwards;
+        }
+
+        .slide-item.active {
+            display: block;
+        }
+
+        .quote-icon {
+            font-family: var(--title-font);
+            font-size: 5rem;
+            color: rgba(214, 175, 55, 0.15);
+            line-height: 1;
+            margin-bottom: -1rem;
+        }
+
+        .slide-quote {
+            font-family: var(--title-font);
+            font-size: 2rem;
+            line-height: 1.5;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .slide-author {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .slide-role {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 3.5rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        @keyframes sliderFade {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==========================================================================
+           11. CONTACT SECTION
+           ========================================================================== */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 6rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item .item-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .contact-item .item-value {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            font-family: var(--title-font);
+        }
+
+        /* Interactive Form Elements */
+        .contact-form {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            padding: 4rem;
+            border-radius: 4px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
+
+        .form-control {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            padding: 0.8rem 0;
+            color: var(--text-light);
+            font-family: var(--body-font);
+            font-size: 1rem;
+            transition: var(--transition-fast);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-bottom-color: var(--accent);
+        }
+
+        .form-label {
+            position: absolute;
+            left: 0;
+            top: 0.8rem;
+            color: var(--text-muted);
+            transition: var(--transition-smooth);
+            pointer-events: none;
+            font-size: 0.95rem;
+        }
+
+        /* Label Micro-interactions */
+        .form-control:focus ~ .form-label,
+        .form-control:not(:placeholder-shown) ~ .form-label {
+            top: -1.2rem;
+            font-size: 0.75rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: none;
+        }
+
+        .error-msg {
+            color: #ff4a4a;
+            font-size: 0.75rem;
+            margin-top: 0.4rem;
+            display: none;
+        }
+
+        .form-group.has-error .form-control {
+            border-bottom-color: #ff4a4a;
+        }
+
+        .form-group.has-error .error-msg {
+            display: block;
+        }
+
+        .success-msg {
+            display: none;
+            background: rgba(214, 175, 55, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--text-light);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        /* ==========================================================================
+           12. FOOTER
+           ========================================================================== */
+        .footer {
+            background-color: #030304;
+            border-top: 1px solid var(--glass-border);
+            padding: 6rem 0 3rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 4rem;
+            margin-bottom: 5rem;
+        }
+
+        .footer-logo {
+            font-family: var(--title-font);
+            font-size: 1.8rem;
+            letter-spacing: 0.4em;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 280px;
+            margin-bottom: 2rem;
+        }
+
+        .socials {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: var(--transition-fast);
+            color: var(--text-muted);
+        }
+
+        .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            transition: var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .legal-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        /* ==========================================================================
+           13. RESPONSIVE DESIGN (MEDIA QUERIES)
+           ========================================================================== */
+        @media (max-width: 1200px) {
+            .container { padding: 0 2.5rem; }
+            .product-list { padding: 2rem 2.5rem; margin: 0 -2.5rem; }
+            .about-grid { gap: 4rem; }
+            .hero-title { font-size: 4.5rem; }
+            .hero-title span { font-size: 3.5rem; }
+        }
+
+        @media (max-width: 992px) {
+            .section { padding: 7rem 0; }
+            .nav-menu, .nav-cta { display: none; }
+            .menu-toggle { display: flex; }
+            
+            /* Responsive Nav Drawer */
+            .navbar.menu-open .nav-menu {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-dark);
+                padding: 8rem 2.5rem;
+                gap: 2.5rem;
+                z-index: 999;
+            }
+            .navbar.menu-open .nav-link { font-size: 1.2rem; }
+            
+            .about-grid { grid-template-columns: 1fr; gap: 4rem; }
+            .about-img-box { padding-bottom: 60%; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem; }
+            .features-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-item.wide, .gallery-item.tall { grid-column: span 1; grid-row: span 1; }
+            .contact-layout { grid-template-columns: 1fr; gap: 4rem; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem; }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title { font-size: 3.2rem; }
+            .hero-title span { font-size: 2.4rem; }
+            .section-title { font-size: 2.2rem; }
+            .card { flex: 0 0 100%; }
+            .form-row { grid-template-columns: 1fr; gap: 2rem; }
+            .contact-form { padding: 2.5rem 1.5rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#hero" class="logo">AETHER<span>.</span></a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">Our Legacy</a></li>
+                <li><a href="#products" class="nav-link">Machines</a></li>
+                <li><a href="#features" class="nav-link">Engineering</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#contact" class="nav-link">Connect</a></li>
+            </ul>
+
+            <a href="#products" class="nav-cta">Reserve Machine</a>
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Raw Mechanical 
+                    <span>Precision. Born Elegance.</span>
+                </h1>
+                <p class="hero-desc">
+                    Crafting minimalist architectural motorcycles for the purist modern rider. Engineered in limited volumes, designed to withstand generations.
+                </p>
+                <div class="hero-actions">
+                    <a href="#products" class="btn btn-primary">Explore Fleet</a>
+                    <a href="#about" class="btn btn-secondary">Our Philosophy</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reveal" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-img-box">
+                    <div class="about-img"></div>
+                    <div class="about-accent"></div>
+                </div>
+                <div class="about-content">
+                    <span class="section-tag">Philosophy</span>
+                    <h2 class="section-title" style="margin-bottom: 2.5rem;">Stripping away the noise to discover structural character.</h2>
+                    <p>At Aether Motors, we view structural engineering as a fine art form. Founded on the paradigm that true design requires restraint, our modern-classic motorcycles honor raw analog engineering with breathtaking sculptural design elements.</p>
+                    <p>Every mechanical linkage, engine casting finish, and leather interface component is individually tuned by master craftsmen. We do not manufacture transportation devices; we generate precise kinetic sculpture.</p>
+                    <a href="#features" class="btn btn-secondary" style="margin-top: 1.5rem;">The Engineering Standard</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section products reveal" id="products">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+                <div class="section-header" style="margin-bottom: 0;">
+                    <span class="section-tag">The 2026 Fleet</span>
+                    <h2 class="section-title">The Standard-Bearers</h2>
+                </div>
+                <div class="controls">
+                    <button class="scroll-btn" id="scroll-left" aria-label="Scroll left">&larr;</button>
+                    <button class="scroll-btn" id="scroll-right" aria-label="Scroll right">&rarr;</button>
+                </div>
+            </div>
+
+            <div class="product-list" id="product-list">
+                
+                <div class="card">
+                    <div class="card-img-box">
+                        <div class="card-img card-img-1"></div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">KRONOS 1200</h3>
+                        <p class="card-desc">An aggressive monolithic modern cafe racer forged for pure acceleration dynamics.</p>
+                        
+                        <div class="card-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Engine Twin</span>
+                                <span class="spec-val">1200cc CC</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Output Power</span>
+                                <span class="spec-val">110 BHP</span>
+                            </div>
+                        </div>
+
+                        <div class="extra-info">
+                            <ul class="info-list">
+                                <li><span>Transmission</span><span>6-Speed Sequential</span></li>
+                                <li><span>Suspension Layout</span><span>Ohlins Fully Adj.</span></li>
+                                <li><span>Total Curb Weight</span><span>182 KG</span></li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn"><span>View Engineering Specs</span></button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img-box">
+                        <div class="card-img card-img-2"></div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">APEX SCRAMBLER</h3>
+                        <p class="card-desc">An architectural all-terrain explorer built with minimalist aesthetics.</p>
+                        
+                        <div class="card-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Engine Monolith</span>
+                                <span class="spec-val">850cc CC</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Output Power</span>
+                                <span class="spec-val">78 BHP</span>
+                            </div>
+                        </div>
+
+                        <div class="extra-info">
+                            <ul class="info-list">
+                                <li><span>Exhaust Geometry</span><span>High-Pass Titanium</span></li>
+                                <li><span>Tire Infrastructure</span><span>Pirelli Scorpion Rally</span></li>
+                                <li><span>Total Curb Weight</span><span>171 KG</span></li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn"><span>View Engineering Specs</span></button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img-box">
+                        <div class="card-img card-img-3"></div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">SPECTER RUNNER</h3>
+                        <p class="card-desc">Low slung urban cruiser built on a billet aircraft aluminum chassis layout.</p>
+                        
+                        <div class="card-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Engine V-Twin</span>
+                                <span class="spec-val">1400cc CC</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Output Power</span>
+                                <span class="spec-val">125 BHP</span>
+                            </div>
+                        </div>
+
+                        <div class="extra-info">
+                            <ul class="info-list">
+                                <li><span>Final Drive Mechanics</span><span>Carbon Belt Drive</span></li>
+                                <li><span>Braking Assemblies</span><span>Brembo Stylema Mono</span></li>
+                                <li><span>Total Curb Weight</span><span>205 KG</span></li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn"><span>View Engineering Specs</span></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section stats reveal">
+        <div class="container">
+            <div class="stats-grid" id="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-title">Global Ateliers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-title">Handbuilt Units / Year</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="45">0</div>
+                    <div class="stat-title">Engineering Awards</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-title">% Mechanical Authenticity</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reveal" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Engineering Artifacts</span>
+                <h2 class="section-title">Designed Without Compromise</h2>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">&#9881;</span>
+                    <h3 class="feature-title">Billet Metal Fabrication</h3>
+                    <p class="feature-desc">Structural frames are precision carved from single blocks of structural 7075-T6 aerospace grade aluminum alloy matrix.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">&#9903;</span>
+                    <h3 class="feature-title">Analog Instrument Array</h3>
+                    <p class="feature-desc">Custom mechanical chronographs built utilizing swiss watch architecture instead of cheap digital display glass.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">&#128293;</span>
+                    <h3 class="feature-title">Symmetric Exothermic Flow</h3>
+                    <p class="feature-desc">Thermal management lines integrated symmetrically into the outer frame fins for maximized natural thermodynamic cooling.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reveal" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Visual Artifacts</span>
+                <h2 class="section-title">The Mechanical Perspective</h2>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item tall">
+                    <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=600&q=80" alt="Exhaust Layout Detail" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Macro Geometry</span>
+                        <h4 class="gallery-title">Titanium Thermal Lines</h4>
+                    </div>
+                </div>
+                <div class="gallery-item wide">
+                    <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=1200&q=80" alt="Cruising Open Horizon" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Atmosphere</span>
+                        <h4 class="gallery-title">The Alpine Dynamic Testing</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=600&q=80" alt="Billet Engine Component" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Engineering Room</span>
+                        <h4 class="gallery-title">Machining Tolerances</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?auto=format&fit=crop&w=600&q=80" alt="Finished Cockpit Architecture" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Interfacing Layout</span>
+                        <h4 class="gallery-title">Saddlehide Control Terminals</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section testimonials reveal">
+        <div class="container">
+            <div class="slider">
+                <div class="quote-icon">&#8220;</div>
+                
+                <div class="slide-item active">
+                    <p class="slide-quote">"The Kronos 1200 changes your fundamental baseline of physical road connection. It feels organic, dangerously tactile, and exceptionally responsive. It is mechanical absolute bliss."</p>
+                    <h5 class="slide-author">Julian Vance</h5>
+                    <p class="slide-role">Collector & Industrial Architectural Designer</p>
+                </div>
+
+                <div class="slide-item">
+                    <p class="slide-quote">"Aether completely ignored current digital layout trends to create a timeless masterpiece. The throttle feedback feels like precision fine-instrument control."</p>
+                    <h5 class="slide-author">Helena Rostova</h5>
+                    <p class="slide-role">Grand Tour Endurance Operator</p>
+                </div>
+
+                <div class="slider-dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reveal" id="contact">
+        <div class="container">
+            <div class="contact-layout">
+                <div class="contact-info">
+                    <div class="section-header">
+                        <span class="section-tag">Commissioning Registry</span>
+                        <h2 class="section-title">Initiate Your Consultation Matrix</h2>
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <span class="item-label">Central Atelier Location</span>
+                            <span class="item-value">Milano, Industrial Sector Alpha</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="item-label">Direct Communication Gateway</span>
+                            <span class="item-value">registry@aethermotors.com</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="success-msg" id="success-msg">
+                        Consultation request logged into the Aether database registry. An industrial advisor will contact you within 24 standard cycles.
+                    </div>
+                    <form class="contact-form" id="contact-form" novalidate>
+                        <div class="form-row">
+                            <div class="form-group" id="group-name">
+                                <input type="text" class="form-control" id="form-name" placeholder=" " required>
+                                <label class="form-label" for="form-name">Full Name</label>
+                                <div class="error-msg">Identity specification is required.</div>
+                            </div>
+                            <div class="form-group" id="group-email">
+                                <input type="email" class="form-control" id="form-email" placeholder=" " required>
+                                <label class="form-label" for="form-email">Secure Email Protocol</label>
+                                <div class="error-msg">A valid digital routing path is required.</div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="group-model">
+                            <input type="text" class="form-control" id="form-model" placeholder=" " required>
+                            <label class="form-label" for="form-model">Machine Variant of Interest</label>
+                            <div class="error-msg">Specify which machine you want to commission.</div>
+                        </div>
+                        <div class="form-group" id="group-message">
+                            <textarea class="form-control" id="form-message" placeholder=" " required></textarea>
+                            <label class="form-label" for="form-message">Bespoke Design System Directives</label>
+                            <div class="error-msg">Configuration requirements must be defined.</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Formal Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">AETHER<span>.</span></div>
+                    <p>Building high-end tactile machinery for the absolute pure refinement seeker.</p>
+                    <div class="socials">
+                        <a href="#" class="social-link" aria-label="X Network">𝕏</a>
+                        <a href="#" class="social-link" aria-label="Instagram">IG</a>
+                        <a href="#" class="social-link" aria-label="YouTube Visual Terminal">YT</a>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="footer-title">Fleet System</h5>
+                    <ul class="footer-links">
+                        <li><a href="#products">Kronos 1200</a></li>
+                        <li><a href="#products">Apex Scrambler</a></li>
+                        <li><a href="#products">Specter Runner</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="footer-title">Atelier Houses</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Milano Base</a></li>
+                        <li><a href="#">Tokyo Studio</a></li>
+                        <li><a href="#">London Outpost</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="footer-title">Resources</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">System Logistics</a></li>
+                        <li><a href="#">Bespoke Configurator</a></li>
+                        <li><a href="#">Registry Support</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 AETHER MOTORS. All mechanical manufacturing architectural designs registered.</div>
+                <div class="legal-links">
+                    <a href="#">Privacy Core</a>
+                    <a href="#">Industrial Warranties</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- NAVIGATION BACKGROUND TOGGLE ---
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // --- MOBILE MENU ---
+            const menuToggle = document.getElementById('menu-toggle');
+            menuToggle.addEventListener('click', () => {
+                navbar.classList.toggle('menu-open');
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navbar.classList.remove('menu-open');
+                });
+            });
+
+            // --- HIGHLIGHT ACTIVE NAV LINK ON SCROLL ---
+            const sections = document.querySelectorAll('section[id]');
+            window.addEventListener('scroll', () => {
+                let scrollY = window.pageYOffset;
+                sections.forEach(current => {
+                    const sectionHeight = current.offsetHeight;
+                    const sectionTop = current.offsetTop - 150;
+                    const sectionId = current.getAttribute('id');
+                    
+                    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                        document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+                        const match = document.querySelector(`.nav-link[href*=${sectionId}]`);
+                        if (match) match.classList.add('active');
+                    }
+                });
+            });
+
+            // --- PRODUCT CAROUSEL CONTROLS ---
+            const productList = document.getElementById('product-list');
+            document.getElementById('scroll-right').addEventListener('click', () => {
+                productList.scrollBy({ left: 480, behavior: 'smooth' });
+            });
+            document.getElementById('scroll-left').addEventListener('click', () => {
+                productList.scrollBy({ left: -480, behavior: 'smooth' });
+            });
+
+            // --- EXPANDABLE PRODUCT SPECS ---
+            const expandBtns = document.querySelectorAll('.expand-btn');
+            expandBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const card = e.target.closest('.card');
+                    card.classList.toggle('expanded');
+                });
+            });
+
+            // --- SCROLL ANIMATIONS ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Trigger stat counter if scrolling past stats section
+                        if(entry.target.querySelector('#stats-container') || entry.target.id === 'stats-container' || entry.target.classList.contains('stats')) {
+                            triggerStatsCounters();
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // --- STATS COUNTER LOGIC ---
+            let statsTriggered = false;
+            function triggerStatsCounters() {
+                if (statsTriggered) return;
+                statsTriggered = true;
+                
+                const counters = document.querySelectorAll('.stat-number');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    let current = 0;
+                    const increment = target / 60; 
+                    
+                    const updateCount = () => {
+                        current += increment;
+                        if (current < target) {
+                            counter.innerText = Math.ceil(current);
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                });
+            }
+
+            // --- TESTIMONIAL SLIDER LOGIC ---
+            const slides = document.querySelectorAll('.slide-item');
+            const dots = document.querySelectorAll('.dot');
+            
+            dots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    const targetIndex = parseInt(e.target.getAttribute('data-index'));
+                    
+                    slides.forEach(s => s.classList.remove('active'));
+                    dots.forEach(d => d.classList.remove('active'));
+                    
+                    slides[targetIndex].classList.add('active');
+                    dots[targetIndex].classList.add('active');
+                });
+            });
+
+            // --- CONTACT FORM VALIDATION ---
+            const form = document.getElementById('contact-form');
+            const successMsg = document.getElementById('success-msg');
+
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(String(email).toLowerCase());
+            }
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let isFormValid = true;
+
+                const fields = ['name', 'email', 'model', 'message'];
+                fields.forEach(field => {
+                    const input = document.getElementById(`form-${field}`);
+                    const group = document.getElementById(`group-${field}`);
+                    
+                    if (!input.value.trim()) {
+                        group.classList.add('has-error');
+                        isFormValid = false;
+                    } else if (field === 'email' && !validateEmail(input.value)) {
+                        group.classList.add('has-error');
+                        isFormValid = false;
+                    } else {
+                        group.classList.remove('has-error');
+                    }
+                });
+
+                if (isFormValid) {
+                    form.style.display = 'none';
+                    successMsg.style.display = 'block';
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+
+            // Clear errors on typing
+            form.querySelectorAll('.form-control').forEach(input => {
+                input.addEventListener('input', (e) => {
+                    const group = e.target.closest('.form-group');
+                    if (e.target.value.trim()) {
+                        group.classList.remove('has-error');
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
