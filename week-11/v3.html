@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Strength</title>
+</head>
+<body>
+
+<h3>Enter Password:</h3>
+<input type="password" id="password" onkeyup="checkPassword()">
+<p id="msg"></p>
+
+<script>
+function checkPassword() {
+    let pass = document.getElementById("password").value;
+    let msg = document.getElementById("msg");
+
+    if (pass.length < 6) {
+        msg.innerHTML = "Weak Password";
+        msg.style.color = "red";
+    } else {
+        msg.innerHTML = "Strong Password";
+        msg.style.color = "green";
+    }
+}
+</script>
+
+</body>
+</html>

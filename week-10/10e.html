@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Grade Calculator</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            width: 320px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        input {
+            width: 85%;
+            padding: 8px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkorange;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h2>Grade Calculator</h2>
+
+        <input type="number" id="m1" placeholder="Subject 1"><br>
+        <input type="number" id="m2" placeholder="Subject 2"><br>
+        <input type="number" id="m3" placeholder="Subject 3"><br>
+        <input type="number" id="m4" placeholder="Subject 4"><br>
+        <input type="number" id="m5" placeholder="Subject 5"><br>
+        <input type="number" id="m6" placeholder="Subject 6"><br>
+
+        <button onclick="calculateGrade()">Calculate Grade</button>
+    </div>
+
+    <script>
+        function calculateGrade() {
+            let m1 = Number(document.getElementById("m1").value);
+            let m2 = Number(document.getElementById("m2").value);
+            let m3 = Number(document.getElementById("m3").value);
+            let m4 = Number(document.getElementById("m4").value);
+            let m5 = Number(document.getElementById("m5").value);
+            let m6 = Number(document.getElementById("m6").value);
+
+            let total = m1 + m2 + m3 + m4 + m5 + m6;
+            let average = total / 6;
+
+            let grade;
+
+            // Conditional statements for grade
+            if (average >= 90) {
+                grade = "A+";
+            } 
+            else if (average >= 80) {
+                grade = "A";
+            } 
+            else if (average >= 70) {
+                grade = "B";
+            } 
+            else if (average >= 60) {
+                grade = "C";
+            } 
+            else if (average >= 50) {
+                grade = "D";
+            } 
+            else {
+                grade = "F";
+            }
+
+            alert("Average Marks: " + average.toFixed(2) + "\nGrade: " + grade);
+        }
+    </script>
+
+</body>
+</html>
